@@ -130,6 +130,19 @@
     animation: spin 6s linear infinite;
   }
 
+  .flat-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .flat-gallery img {
+    width: 100%;
+    border: 6px groove #ff69b4;
+    box-shadow: 0 0 15px #fff, 0 0 10px #ff0;
+    animation: floaty 5s ease-in-out infinite;
+  }
+
   .footer {
     text-align: center;
     margin: 20px 0 60px;
@@ -167,7 +180,7 @@
   <div class="container">
     <div class="panel">
       <h1>🎈 COUNTDOWN TO MOVE-IN DAY! 🎈</h1>
-      <div class="sub">1 November 2025, 23 Courtlands Avenue, Kew Gardens — <span class="blink">NEW FLAT, NEW ERA ✨</span></div>
+      <div class="sub">23 Courtlands Avenue, 1st November 2025 — <span class="blink">NEW FLAT, NEW ERA ✨</span></div>
 
       <div class="ticker"><div class="inner">🚚📦 I CAN'T KEEP CALM — I'M MOVING ON 1 NOVEMBER 2025!!! 📦🚚 ✨ New keys, new kettle, new chaos ✨ — Repeat after me: boxes, bubble wrap, bravery — Did someone say IKEA meatballs? — Remember to label the cables!!! —</div></div>
 
@@ -178,19 +191,19 @@
         <div class="timebox"><span class="num" id="seconds">--</span>Seconds</div>
       </div>
 
-      <div class="badges">
-        <div class="badge">BEST VIEWED IN <span class="blink">IE6</span></div>
-        <div class="badge">UNDER CONSTRUCTION 👷</div>
-        <div class="badge">100% FRAMES &amp; TABLES</div>
-        <div class="badge">NOW WITH 87% MORE GIFS</div>
-      </div>
-
       <div class="gifzone">
         <div class="glitter" title="Glitter 1"></div>
         <div class="glitter" title="Glitter 2" style="animation-duration:10s"></div>
         <div class="glitter" title="Glitter 3" style="animation-direction:reverse"></div>
         <div class="glitter" title="Glitter 4" style="filter:hue-rotate(120deg)"></div>
         <div class="glitter" title="Glitter 5" style="filter:hue-rotate(240deg)"></div>
+      </div>
+
+      <div class="flat-gallery">
+        <img src="flat1.jpg" alt="Flat photo 1">
+        <img src="flat2.jpg" alt="Flat photo 2">
+        <img src="flat3.jpg" alt="Flat photo 3">
+        <img src="flat4.jpg" alt="Flat photo 4">
       </div>
 
       <marquee behavior="alternate" scrollamount="10" direction="right" style="font-size:26px; font-weight:900; text-shadow:2px 2px 0 #000">🎊 NEW FLAT HYPE!!! 🎊</marquee>
