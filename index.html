@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🎉 MOVE-IN COUNTDOWN — 1 NOV 2025 🎉</title>
+<style>
+  /* 2000s "shitty HTML" maximalist aesthetic */
+  @keyframes hueRotate { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
+  @keyframes blink { 50% { opacity: 0; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px);} }
+  @keyframes marqueeX { from { transform: translateX(100%);} to { transform: translateX(-100%);} }
+  @keyframes floaty { 0%{ transform: translateY(0) rotate(0);} 50%{ transform: translateY(-15px) rotate(10deg);} 100%{ transform: translateY(0) rotate(0);} }
+  @keyframes rainbowBG { 0% {background-position:0 0;} 100% {background-position:800% 0;} }
+
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: "Comic Sans MS", "Comic Sans", cursive, Papyrus, fantasy;
+    color: #fff;
+    background-image: linear-gradient(90deg,
+      #ff0040, #ff7a00, #ffee00, #32ff00, #00ffd7, #0091ff, #7a00ff, #ff00ea, #ff0040);
+    background-size: 800% 100%;
+    animation: rainbowBG 20s linear infinite;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 12px;
+  }
+
+  .panel {
+    border: 8px ridge gold;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,.25), rgba(255,255,255,.25) 10px, rgba(0,0,0,.15) 10px, rgba(0,0,0,.15) 20px);
+    box-shadow: 0 0 30px rgba(255,255,255,.8), inset 0 0 20px rgba(0,0,0,.5);
+    padding: 16px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 48px;
+    text-shadow: 3px 3px 0 #000, -3px -3px 0 #0ff;
+    animation: blink 1.2s steps(2, end) infinite;
+  }
+
+  .sub {
+    text-align: center;
+    font-size: 20px;
+    margin-top: -8px;
+    animation: hueRotate 6s linear infinite;
+  }
+
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .timebox {
+    background: radial-gradient(circle at top, #fff 0%, #fffa 20%, #0006 70%);
+    border: 6px groove #ff0;
+    text-align: center;
+    padding: 12px;
+    font-size: 22px;
+    color: #000;
+  }
+  .num {
+    display: block;
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+
+  .ticker {
+    position: relative;
+    overflow: hidden;
+    border: 6px dashed #fff;
+    margin: 16px 0;
+    background: rgba(0,0,0,.35);
+  }
+  .ticker .inner {
+    white-space: nowrap;
+    display: inline-block;
+    padding: 6px 0;
+    animation: marqueeX 18s linear infinite;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 #000;
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 12px 0;
+  }
+  .badge {
+    border: 3px outset #eee;
+    background: #222;
+    color: #0f0;
+    padding: 6px 10px;
+    font-family: "Courier New", monospace;
+    box-shadow: inset 0 0 10px #0f0, 0 0 10px #0f0;
+    animation: bounce 1.4s ease-in-out infinite;
+  }
+
+  .blink {
+    animation: blink 0.8s steps(2, end) infinite;
+  }
+
+  .gifzone {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .glitter {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background:
+      radial-gradient(circle, rgba(255,255,255,.9) 0 3px, transparent 4px) 10px 10px/40px 40px,
+      radial-gradient(circle, rgba(255,255,255,.7) 0 2px, transparent 3px) 20px 25px/60px 60px,
+      radial-gradient(circle, rgba(255,255,255,1) 0 2px, transparent 3px) 30px 5px/50px 50px,
+      conic-gradient(from 0turn, #ff0, #0ff, #f0f, #0f0, #ff0);
+    border: 4px ridge #fff;
+    animation: spin 6s linear infinite;
+  }
+
+  .footer {
+    text-align: center;
+    margin: 20px 0 60px;
+    font-size: 14px;
+  }
+
+  /* Cursor sparkle */
+  .sparkle { position: fixed; pointer-events:none; filter: drop-shadow(0 0 6px #fff); }
+
+  /* Confetti */
+  .confetti {
+    position: fixed;
+    top: -10px;
+    width: 10px; height: 14px;
+    opacity: .9;
+    animation: fall linear forwards;
+  }
+  @keyframes fall {
+    to { transform: translate3d(var(--x,0), 110vh, 0) rotate(720deg); }
+  }
+
+  /* Fake hit counter */
+  .counter {
+    display:inline-block; background:#000; color:#0f0; padding:6px 10px; border:4px inset #0f0; font-family: "Courier New", monospace;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 700px){
+    .countdown { grid-template-columns: repeat(2, 1fr); }
+    h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <h1>🎈 COUNTDOWN TO MOVE-IN DAY! 🎈</h1>
+      <div class="sub">1 November 2025, 23 Courtlands Avenue, Kew Gardens — <span class="blink">NEW FLAT, NEW ERA ✨</span></div>
+
+      <div class="ticker"><div class="inner">🚚📦 I CAN'T KEEP CALM — I'M MOVING ON 1 NOVEMBER 2025!!! 📦🚚 ✨ New keys, new kettle, new chaos ✨ — Repeat after me: boxes, bubble wrap, bravery — Did someone say IKEA meatballs? — Remember to label the cables!!! —</div></div>
+
+      <div id="countdown" class="countdown" aria-live="polite">
+        <div class="timebox"><span class="num" id="days">--</span>Days</div>
+        <div class="timebox"><span class="num" id="hours">--</span>Hours</div>
+        <div class="timebox"><span class="num" id="minutes">--</span>Minutes</div>
+        <div class="timebox"><span class="num" id="seconds">--</span>Seconds</div>
+      </div>
+
+      <div class="badges">
+        <div class="badge">BEST VIEWED IN <span class="blink">IE6</span></div>
+        <div class="badge">UNDER CONSTRUCTION 👷</div>
+        <div class="badge">100% FRAMES &amp; TABLES</div>
+        <div class="badge">NOW WITH 87% MORE GIFS</div>
+      </div>
+
+      <div class="gifzone">
+        <div class="glitter" title="Glitter 1"></div>
+        <div class="glitter" title="Glitter 2" style="animation-duration:10s"></div>
+        <div class="glitter" title="Glitter 3" style="animation-direction:reverse"></div>
+        <div class="glitter" title="Glitter 4" style="filter:hue-rotate(120deg)"></div>
+        <div class="glitter" title="Glitter 5" style="filter:hue-rotate(240deg)"></div>
+      </div>
+
+      <marquee behavior="alternate" scrollamount="10" direction="right" style="font-size:26px; font-weight:900; text-shadow:2px 2px 0 #000">🎊 NEW FLAT HYPE!!! 🎊</marquee>
+      <marquee behavior="scroll" scrollamount="4" direction="left" style="font-size:22px;">🏠 ✨ Keys • Kettle • Chaos • Cosiness ✨ 🧼 🧹 📦</marquee>
+
+      <div class="footer">
+        <div>Visitor Counter: <span class="counter" id="counter">0001337</span></div>
+        <div style="margin-top:10px">Sign my <a href="#guestbook" onclick="alert('Guestbook coming soon! Leave a note on the fridge instead 🧲'); return false;">GUESTBOOK</a> 💌</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Countdown logic — local time to 1 November 2025 at 00:00:00
+    const target = new Date('November 1, 2025 00:00:00');
+    const d = document.getElementById('days');
+    const h = document.getElementById('hours');
+    const m = document.getElementById('minutes');
+    const s = document.getElementById('seconds');
+
+    let done = false;
+
+    function pad(n){ return String(n).padStart(2, '0'); }
+
+    function tick(){
+      const now = new Date();
+      let diff = target - now;
+      if (diff <= 0){
+        if(!done){ celebrate(); }
+        done = true; diff = 0;
+      }
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff / (1000*60*60)) % 24);
+      const minutes = Math.floor((diff / (1000*60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      d.textContent = pad(days);
+      h.textContent = pad(hours);
+      m.textContent = pad(minutes);
+      s.textContent = pad(seconds);
+    }
+
+    setInterval(tick, 250);
+    tick();
+
+    // Cursor sparkles
+    document.addEventListener('mousemove', (e)=>{
+      for(let i=0;i<2;i++){
+        const star = document.createElement('div');
+        star.className = 'sparkle';
+        star.textContent = '✷';
+        star.style.left = (e.clientX + (Math.random()*12-6)) + 'px';
+        star.style.top = (e.clientY + (Math.random()*12-6)) + 'px';
+        star.style.fontSize = (8 + Math.random()*14) + 'px';
+        star.style.animation = 'blink .8s steps(2,end) infinite';
+        document.body.appendChild(star);
+        setTimeout(()=> star.remove(), 500 + Math.random()*600);
+      }
+    });
+
+    // Confetti celebration when countdown hits 0
+    function celebrate(){
+      const colors = ['#ff0040','#ff7a00','#ffee00','#32ff00','#00ffd7','#0091ff','#7a00ff','#ff00ea'];
+      const N = 240;
+      for(let i=0;i<N;i++){
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random()*100 + 'vw';
+        c.style.background = colors[i % colors.length];
+        c.style.transform = `translate3d(0,-10px,0) rotate(${Math.random()*360}deg)`;
+        const x = (Math.random()*200 - 100) + 'vw';
+        const dur = 3 + Math.random()*3;
+        c.style.setProperty('--x', x);
+        c.style.animationDuration = dur + 's';
+        c.style.mixBlendMode = 'screen';
+        document.body.appendChild(c);
+        setTimeout(()=> c.remove(), dur*1000 + 1000);
+      }
+      // Flash the header message
+      alert('🎉 MOVING DAY!!! 🎉 Welcome to the NEW FLAT!');
+    }
+
+    // Silly fake hit counter increment
+    const counter = document.getElementById('counter');
+    let val = parseInt(counter.textContent, 10);
+    setInterval(()=>{ val += Math.floor(1 + Math.random()*3); counter.textContent = String(val).padStart(7,'0'); }, 2000);
+  </script>
+</body>
+</html>
+
